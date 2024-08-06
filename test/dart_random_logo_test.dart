@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 void main() {
   group('Affine2D', () {
     test('constructor', () {
-      final W = Matrix2.identity();
+      final W = Matrix2(1, 0, 0, 1);
       final b = Vector2(2, 3);
 
       final aff = Affine2(W, b);
@@ -22,7 +22,7 @@ void main() {
     });
   });
 
-  group('Affine2D', () {
+  group('SigmaFactorIFS', () {
     test('randSigmaFactorIFS generates valid SigmaFactorIFS', () {
       Random rng = Random();
       SigmaFactorIFS sigmaFactorIFS = randSigmaFactorIFS(rng);
@@ -31,7 +31,7 @@ void main() {
       expect(sigmaFactorIFS.transforms, isNotEmpty);
 
       // Check that catdist list is not empty
-      expect(sigmaFactorIFS.catdist, isNotEmpty);
+      expect(sigmaFactorIFS.probs, isNotEmpty);
 
       // Check each transform
       for (var transform in sigmaFactorIFS.transforms) {
@@ -44,22 +44,47 @@ void main() {
   group("ifs_sigma_factor_factor", () {
     test('sampleSvs generates valid singular values', () {
     Random rng = Random();
-    double alpha = 10.0;
-    int N = 5;
-
-    Matrix2 singularValues = sampleSvs(rng, alpha, N);
+    int N = 4;
+    double alpha = 0.5 * (N + 5.5);
+    List<List<double>> singularValues = sampleSvs(rng, alpha, N);
 
     // Check that the matrix has the correct dimensions
-    //expect(singularValues.rowStride, equals(N));
-    //expect(singularValues.columnStride, equals(2));
+    expect(singularValues.length, equals(N));
+    expect(singularValues[0].length, equals(2));
 
+    double sigmaFactor = 0.0;
     // Check that the values are within the expected range
     for (int i = 0; i < N; i++) {
-      double sigma1 = singularValues.entry(i, 0);
-      double sigma2 = singularValues.entry(i, 1);
-      expect(sigma1, inInclusiveRange(0.0, alpha));
-      expect(sigma2, inInclusiveRange(0.0, alpha));
+      double sigma1 = singularValues[i][0];
+      double sigma2 = singularValues[i][1];
+      sigmaFactor += sigma1 + 2 * sigma2;
     }
+    expect((sigmaFactor - alpha).abs() < 1e-7, true);
   });
+
+  group("ifs", (){
+    test("randSigmaFactorIFS", (){
+      final rng = Random();
+      final ifs = randSigmaFactorIFS(rng);
+      double s = 0;
+      for (double p in ifs.probs){
+        s += p;
+      }
+      expect((s - 1.0).abs() < 1e-7, true);
+    });
+  });
+
+  group("point_generation", () {
+    test("categoricalSample", (){
+      final rng = Random();
+      int c = categoricalSample(rng, [0.01, 0.01, 0.98]);
+      print(c);
+    });
+    test("pointGeneration", () {
+      final (xs, ys) = generatePoints();
+      expect(xs.length, equals(ys.length));
+    });
+  });
+
   }) ;
 }

@@ -6,7 +6,7 @@ double uniform(Random rng, double min, double max) {
   return min + rng.nextDouble() * (max - min);
 }
 
-Matrix2 sampleSvs(Random rng, double alpha, int N) {
+List<List<double>> sampleSvs(Random rng, double alpha, int N) {
   List<List<double>> singularValues = List.generate(N, (_) => List.filled(2, 0.0));
 
   double bl = alpha - 3 * N + 3;
@@ -30,5 +30,5 @@ Matrix2 sampleSvs(Random rng, double alpha, int N) {
   singularValues[N - 1][0] = sigma1;
   singularValues[N - 1][1] = sigma2;
 
-  return Matrix2.fromList(singularValues.expand((i) => i).toList());
+  return singularValues;
 }

@@ -1,9 +1,13 @@
-import 'package:dart_random_logo/dart_random_logo.dart' as dart_random_logo;
+import 'dart:math';
 import 'package:vector_math/vector_math.dart';
 
+import 'package:dart_random_logo/dart_random_logo.dart';
+
 void main(List<String> arguments) {
-  final aff = dart_random_logo.Affine2(Matrix2.identity(), Vector2(2, 3));
-  final point = Vector2(1, 1);
-  final transformedPoint = aff(point); // Using the call operator
-  print(transformedPoint); // Output: (3.0, 4.0)
+  final (xs, ys) = generatePoints();
+  for( int i = 1; i < xs.length; i ++ ){
+    double x = xs[i];
+    double y = ys[i];
+    print("$x, $y");
+  }
 }
