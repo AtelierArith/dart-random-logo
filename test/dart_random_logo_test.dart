@@ -43,48 +43,47 @@ void main() {
 
   group("ifs_sigma_factor_factor", () {
     test('sampleSvs generates valid singular values', () {
-    Random rng = Random();
-    int N = 4;
-    double alpha = 0.5 * (N + 5.5);
-    List<List<double>> singularValues = sampleSvs(rng, alpha, N);
+      Random rng = Random();
+      int N = 4;
+      double alpha = 0.5 * (N + 5.5);
+      List<List<double>> singularValues = sampleSvs(rng, alpha, N);
 
-    // Check that the matrix has the correct dimensions
-    expect(singularValues.length, equals(N));
-    expect(singularValues[0].length, equals(2));
+      // Check that the matrix has the correct dimensions
+      expect(singularValues.length, equals(N));
+      expect(singularValues[0].length, equals(2));
 
-    double sigmaFactor = 0.0;
-    // Check that the values are within the expected range
-    for (int i = 0; i < N; i++) {
-      double sigma1 = singularValues[i][0];
-      double sigma2 = singularValues[i][1];
-      sigmaFactor += sigma1 + 2 * sigma2;
-    }
-    expect((sigmaFactor - alpha).abs() < 1e-7, true);
-  });
-
-  group("ifs", (){
-    test("randSigmaFactorIFS", (){
-      final rng = Random();
-      final ifs = randSigmaFactorIFS(rng);
-      double s = 0;
-      for (double p in ifs.probs){
-        s += p;
+      double sigmaFactor = 0.0;
+      // Check that the values are within the expected range
+      for (int i = 0; i < N; i++) {
+        double sigma1 = singularValues[i][0];
+        double sigma2 = singularValues[i][1];
+        sigmaFactor += sigma1 + 2 * sigma2;
       }
-      expect((s - 1.0).abs() < 1e-7, true);
+      expect((sigmaFactor - alpha).abs() < 1e-7, true);
+    });
+
+    group("ifs", () {
+      test("randSigmaFactorIFS", () {
+        final rng = Random();
+        final ifs = randSigmaFactorIFS(rng);
+        double s = 0;
+        for (double p in ifs.probs) {
+          s += p;
+        }
+        expect((s - 1.0).abs() < 1e-7, true);
+      });
+    });
+
+    group("point_generation", () {
+      test("categoricalSample", () {
+        final rng = Random();
+        int c = categoricalSample(rng, [0.01, 0.01, 0.98]);
+        print(c);
+      });
+      test("pointGeneration", () {
+        final (xs, ys) = generatePoints();
+        expect(xs.length, equals(ys.length));
+      });
     });
   });
-
-  group("point_generation", () {
-    test("categoricalSample", (){
-      final rng = Random();
-      int c = categoricalSample(rng, [0.01, 0.01, 0.98]);
-      print(c);
-    });
-    test("pointGeneration", () {
-      final (xs, ys) = generatePoints();
-      expect(xs.length, equals(ys.length));
-    });
-  });
-
-  }) ;
 }

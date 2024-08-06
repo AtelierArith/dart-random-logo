@@ -2,18 +2,18 @@ import 'dart:math';
 import 'package:vector_math/vector_math.dart';
 import './ifs.dart';
 
-int categoricalSample(Random rng, List<double> p){
-    int n = p.length;
-    int i = 0;
-    double c = p[0];
-    double u = rng.nextDouble();
-    while (c < u && i < n){
-        c += p[i += 1];
-    }
-    return i;
+int categoricalSample(Random rng, List<double> p) {
+  int n = p.length;
+  int i = 0;
+  double c = p[0];
+  double u = rng.nextDouble();
+  while (c < u && i < n) {
+    c += p[i += 1];
+  }
+  return i;
 }
 
-void generatePointsCore(List<double> xs, List<double> ys){
+void generatePointsCore(List<double> xs, List<double> ys) {
   final N = xs.length;
   final rng = Random();
   final ifs = randSigmaFactorIFS(rng);
@@ -43,4 +43,3 @@ void generatePointsCore(List<double> xs, List<double> ys){
   generatePointsCore(xs, ys);
   return (xs, ys);
 }
-

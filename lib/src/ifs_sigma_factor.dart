@@ -1,13 +1,13 @@
 import 'dart:math';
 import 'package:vector_math/vector_math.dart';
 
-
 double uniform(Random rng, double min, double max) {
   return min + rng.nextDouble() * (max - min);
 }
 
 List<List<double>> sampleSvs(Random rng, double alpha, int N) {
-  List<List<double>> singularValues = List.generate(N, (_) => List.filled(2, 0.0));
+  List<List<double>> singularValues =
+      List.generate(N, (_) => List.filled(2, 0.0));
 
   double bl = alpha - 3 * N + 3;
   double bu = alpha;

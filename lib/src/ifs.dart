@@ -66,11 +66,11 @@ SigmaFactorIFS randSigmaFactorIFS(Random rng) {
   }
 
   double s = 0;
-  for (double p in probs){
+  for (double p in probs) {
     s += p;
   }
-  for (int i=0; i < probs.length; i++){
-    probs[i] = probs[i]/s;
+  for (int i = 0; i < probs.length; i++) {
+    probs[i] = probs[i] / s;
   }
   return SigmaFactorIFS(transforms, probs);
 }
