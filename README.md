@@ -16,6 +16,13 @@ $ dart run
 
 We will see an image file called `image.png` is created.
 
+### Examples
+
+![image](https://github.com/user-attachments/assets/e5a870da-f8c3-4f10-860e-9c6174a66e1f)
+![image](https://github.com/user-attachments/assets/baabd74d-e809-43fb-895e-37e78187111b)
+![image](https://github.com/user-attachments/assets/3d890bcf-15d3-4c63-8517-db8304aa8795)
+![image](https://github.com/user-attachments/assets/6799cbe4-cbb1-4eb0-931a-511a38415630)
+
 ## Run unit testing
 
 ```sh
