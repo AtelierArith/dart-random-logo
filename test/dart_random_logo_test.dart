@@ -71,14 +71,15 @@ void main() {
           s += p;
         }
         expect((s - 1.0).abs() < 1e-7, true);
+        expect(ifs.transforms.length, equals(ifs.probs.length));
       });
     });
 
     group("point_generation", () {
       test("categoricalSample", () {
         final rng = Random();
-        int c = categoricalSample(rng, [0.01, 0.01, 0.98]);
-        print(c);
+        int c = categoricalSample(rng, [0.1, 0.3, 0.6]);
+        expect(c, inInclusiveRange(0, 2));
       });
       test("pointGeneration", () {
         final (xs, ys) = generatePoints();

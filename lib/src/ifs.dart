@@ -1,5 +1,3 @@
-import "package:ml_linalg/linalg.dart";
-import "package:scidart/numdart.dart";
 import "package:vector_math/vector_math.dart";
 import 'dart:math';
 
@@ -43,21 +41,6 @@ SigmaFactorIFS randSigmaFactorIFS(Random rng) {
     double d2 = rng.nextInt(2) * 2 - 1;
     Matrix2 D = diagm(d1, d2);
     Matrix2 W = rotTheta * sgmMat * rotPhi * D;
-    /*
-    // print("W=$W");
-    final a11 = W.entry(0, 0);
-    final a12 = W.entry(0, 1);
-    final a21 = W.entry(1, 0);
-    final a22 = W.entry(1, 1);
-
-    final svd = SVD(Array2d([
-      Array([a11, a12]),
-      Array([a21, a22])
-    ]));
-    print("svd=${svd.S()}");
-    print(sigma1);
-    print(sigma2);
-    */
     double b1 = uniform(rng, -1.0, 1.0);
     double b2 = uniform(rng, -1.0, 1.0);
     Vector2 b = Vector2(b1, b2);
