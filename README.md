@@ -1,10 +1,12 @@
 # dart-random-logo
 
-This repository provides a argorithm generating fractal-like images using SVD written in Dart.
+This repository provides an algorithm for generating fractal-like images using SVD written in Dart.
 
 ## How to use
 
-- Install `dart`
+1. Install `dart` by following the official Dart installation guide.
+
+2. Clone the repository:
 
 ```sh
 $ git clone https://github.com/AtelierArith/dart-random-logo
@@ -19,3 +21,10 @@ We will see an image file called `image.png` is created.
 ```sh
 $ dart test
 ```
+
+## Appendix
+
+We provides several implementation using C++ and Julia.
+
+- [CxxRandomLogo](https://github.com/AtelierArith/CxxRandomLogo)
+- [RandomLogos.jl](https://github.com/AtelierArith/RandomLogos.jl)
