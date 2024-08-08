@@ -19,10 +19,12 @@ void main(List<String> arguments) {
       ys.reduce((value, element) => value < element ? value : element);
   final ysMax =
       ys.reduce((value, element) => value > element ? value : element);
-  final normalizedXs =
-      xs.map((e) => (1 + ((W - 1 - 1)/(xsMax - xsMin)) * (e - xsMin))).toList();
-  final normalizedYs =
-      ys.map((e) => (1 + ((H - 1 - 1)/(ysMax - ysMin)) * (e - ysMin))).toList();
+  final normalizedXs = xs
+      .map((e) => (1 + ((W - 1 - 1) / (xsMax - xsMin)) * (e - xsMin)))
+      .toList();
+  final normalizedYs = ys
+      .map((e) => (1 + ((H - 1 - 1) / (ysMax - ysMin)) * (e - ysMin)))
+      .toList();
   final image = img.Image(width: W, height: H);
 
   final red = img.ColorRgb8(
@@ -42,7 +44,11 @@ void main(List<String> arguments) {
     final x = normalizedXs[i].toInt();
     final y = normalizedYs[i].toInt();
     image.setPixelRgb(
-      x,y, c.r, c.g, c.b,
+      x,
+      y,
+      c.r,
+      c.g,
+      c.b,
     );
   }
   final png = img.encodePng(image);
