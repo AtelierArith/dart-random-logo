@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:vector_math/vector_math.dart';
 
 double uniform(Random rng, double min, double max) {
   return min + rng.nextDouble() * (max - min);
