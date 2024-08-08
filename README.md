@@ -1,3 +1,5 @@
+[![CI](https://github.com/AtelierArith/dart-random-logo/actions/workflows/CI.yml/badge.svg)](https://github.com/AtelierArith/dart-random-logo/actions/workflows/CI.yml)
+
 # dart-random-logo
 
 This repository provides an algorithm for generating fractal-like images using SVD written in Dart.
